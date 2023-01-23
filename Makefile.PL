@@ -19,7 +19,11 @@ name 'License-SPDX';
 perl_version 5.008;
 readme_from 'SPDX.pm';
 recursive_author_tests('xt');
-# requires 'Readonly' => 0;
+requires 'Class::Utils' => 0;
+requires 'Cpanel::JSON::XS' => 0;
+requires 'File::Share' => 0;
+requires 'List::Util' => 0;
+requires 'Perl6::Slurp' => 0;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/License-SPDX/issues',
 resources 'homepage' => 'https://github.com/michal-josef-spacek/License-SPDX';
 resources 'repository' => 'git://github.com/michal-josef-spacek/License-SPDX';

@@ -23,6 +23,11 @@ no_index:
     - t
     - xt
 requires:
+  Class::Utils: 0
+  Cpanel::JSON::XS: 0
+  File::Share: 0
+  List::Util: 0
+  Perl6::Slurp: 0
   perl: 5.8.0
 resources:
   bugtracker: https://github.com/michal-josef-spacek/License-SPDX/issues
