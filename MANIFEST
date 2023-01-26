@@ -19,6 +19,7 @@ MANIFEST			This list of files
 META.yml
 README
 share/licenses.json
+SIGNATURE
 SPDX.pm
 t/License-SPDX/01-use.t
 t/License-SPDX/02-version.t
