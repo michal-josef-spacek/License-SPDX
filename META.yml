@@ -18,6 +18,7 @@ meta-spec:
 name: License-SPDX
 no_index:
   directory:
+    - examples
     - inc
     - share
     - t

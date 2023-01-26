@@ -87,3 +87,165 @@ sub spdx_version {
 }
 
 1;
+
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+License::SPDX - Object for SPDX licenses handling.
+
+=head1 SYNOPSIS
+
+ use License::SPDX;
+
+ my $obj = License::SPDX->new;
+ my $checked = $obj->check_license($check_string, $opts_hr);
+ my $license_hr = $obj->license($license_id);
+ my $licenses = $obj->licenses;
+ my $spdx_release_date = $obj->spdx_release_date;
+ my $spdx_version = $obj->spdx_version;
+
+=head1 METHODS
+
+=head2 C<new>
+
+ my $obj = License::SPDX->new;
+
+Constructor.
+
+Returns instance of object.
+
+=head2 C<check_license>
+
+ my $checked = $obj->check_license($check_string, $opts_hr);
+
+Check if license exists.
+Argument C<$opts_hr> is reference to hash with parameter 'check_type' for
+definition of C<check_license()> type.
+
+Possible 'check_type' values:
+
+ 'id' - Check license id.
+ 'name' - Check license name.
+
+Default value of 'check_type' is 'id'.
+If 'check_type' is bad, fail with error.
+
+Returns 1 (license exist) or 0 (license doesn't exist).
+
+=head2 C<license>
+
+ my $license_hr = $obj->license($license_id);
+
+Get license structure.
+
+Returns reference to hash.
+
+=head2 C<licenses>
+
+ my $licenses = $obj->licenses;
+
+Get all license structures.
+
+Returns array of references to hash.
+
+=head2 C<spdx_release_date>
+
+ my $spdx_release_date = $obj->spdx_release_date;
+
+Get release date of data structure with SPDX license.
+
+Returns string.
+
+=head2 C<spdx_version>
+
+ my $spdx_version = $obj->spdx_version;
+
+Get version of data structure with SPDX license.
+
+Returns string.
+
+=head1 ERRORS
+
+ new():
+         From Class::Utils::set_params():
+                 Unknown parameter '%s'.
+
+ check_license():
+         Check type '%s' doesn't supported.
+
+=head1 EXAMPLE
+
+=for comment filename=check_license_id.pl
+
+ use strict;
+ use warnings;
+
+ use License::SPDX;
+
+ if (@ARGV < 1) {
+         print STDERR "Usage: $0 license_id\n";
+         exit 1;
+ }
+ my $license_id = $ARGV[0];
+
+ # Object.
+ my $obj = License::SPDX->new;
+
+ print 'License with id \''.$license_id.'\' is ';
+ if ($obj->check_license($license_id)) {
+         print "suppored.\n";
+ } else {
+         print "not suppored.\n";
+ }
+
+ # Output for 'MIT':
+ # License with id 'MIT' is suppored.
+
+ # Output for 'BAD':
+ # License with id 'BAD' is not suppored.
+
+=head1 DEPENDENCIES
+
+L<Class::Utils>,
+L<Cpanel::JSON::XS>,
+L<Error::Pure>.
+L<File::Share>,
+L<List::Util>,
+L<Perl6::Slurp>.
+
+=head1 SEE ALSO
+
+=over
+
+=item L<rpm-spec-license>
+
+Tool for working with RPM spec file licenses.
+
+=back
+
+=head1 REPOSITORY
+
+L<https://github.com/michal-josef-spacek/License-SPDX>
+
+=head1 AUTHOR
+
+Michal Josef Špaček L<mailto:skim@cpan.org>
+
+L<http://skim.cz>
+
+=head1 LICENSE AND COPYRIGHT
+
+© 2023 Michal Josef Špaček
+
+BSD 2-Clause License
+
+=head1 VERSION
+
+0.01
+
+=cut
