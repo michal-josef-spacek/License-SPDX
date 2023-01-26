@@ -25,6 +25,7 @@ no_index:
 requires:
   Class::Utils: 0
   Cpanel::JSON::XS: 0
+  Error::Pure: 0
   File::Share: 0
   List::Util: 0
   Perl6::Slurp: 0

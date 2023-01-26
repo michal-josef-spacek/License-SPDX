@@ -5,6 +5,7 @@ use warnings;
 
 use Class::Utils qw(set_params);
 use Cpanel::JSON::XS;
+use Error::Pure qw(err);
 use File::Share ':all';
 use List::Util qw(first);
 use Perl6::Slurp qw(slurp);
@@ -45,6 +46,12 @@ sub check_license {
 			if ($check_string eq $license_hr->{'licenseId'}) {
 				return 1;
 			}
+		} elsif ($opts_hr->{'check_type'} eq 'name') {
+			if ($check_string eq $license_hr->{'name'}) {
+				return 1;
+			}
+		} else {
+			err "Check type '$opts_hr->{'check_type'}' doesn't supported.";
 		}
 	};
 

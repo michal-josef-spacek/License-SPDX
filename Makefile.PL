@@ -21,6 +21,7 @@ readme_from 'SPDX.pm';
 recursive_author_tests('xt');
 requires 'Class::Utils' => 0;
 requires 'Cpanel::JSON::XS' => 0;
+requires 'Error::Pure' => 0;
 requires 'File::Share' => 0;
 requires 'List::Util' => 0;
 requires 'Perl6::Slurp' => 0;
