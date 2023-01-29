@@ -28,6 +28,7 @@ requires:
   Cpanel::JSON::XS: 0
   Error::Pure: 0
   File::Share: 0
+  JSON::PP::Boolean: 0
   List::Util: 0
   Perl6::Slurp: 0
   perl: 5.8.0
