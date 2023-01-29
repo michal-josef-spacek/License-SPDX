@@ -1,7 +1,8 @@
 TODO
 ====
 2, Finish tests.
-3.
+3. Remove test depencency for JSON::PP::Boolean
+4.
 
 Applied
 =======
