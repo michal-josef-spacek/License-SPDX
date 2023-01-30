@@ -1,4 +1,5 @@
 0.03
+ - Add tests for check_license() method.
  - Fix dependency to JSON::PP::Boolean (is test dependency).
 
 0.02 2023-01-29T11:00:36+01:00
