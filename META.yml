@@ -25,9 +25,9 @@ no_index:
     - t
     - xt
 requires:
-  Class::Utils: 0
+  Class::Utils: 0.14
   Cpanel::JSON::XS: 0
-  Error::Pure: 0
+  Error::Pure: 0.3
   File::Share: 0
   List::Util: 0
   Perl6::Slurp: 0
