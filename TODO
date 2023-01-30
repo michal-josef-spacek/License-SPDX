@@ -1,6 +1,5 @@
 TODO
 ====
-2, Finish tests.
 3. Remove test depencency for JSON::PP::Boolean
 4.
 
@@ -8,3 +7,6 @@ Applied
 =======
 1. Implement check SPDX id
 OK [20230126] skim
+
+2, Finish tests.
+OK [20220130] skim
