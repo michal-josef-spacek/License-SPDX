@@ -1,4 +1,5 @@
 0.03
+ - Add test for licenses() method.
  - Add tests for check_license() method.
  - Fix dependency to JSON::PP::Boolean (is test dependency).
 
