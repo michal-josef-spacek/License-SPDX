@@ -23,7 +23,7 @@ is_deeply(
 		'licenseId' => 'MIT',
 		'name' => 'MIT License',
 		'reference' => 'https://spdx.org/licenses/MIT.html',
-		'referenceNumber' => 141,
+		'referenceNumber' => 129,
 		'seeAlso' => [
 			'https://opensource.org/licenses/MIT',
 		],

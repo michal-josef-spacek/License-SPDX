@@ -8,4 +8,4 @@ use Test::NoWarnings;
 # Test.
 my $obj = License::SPDX->new;
 my $ret = $obj->spdx_release_date;
-is($ret, '2022-11-30', 'SPDX release date (2022-11-30).');
+is($ret, '2023-02-17', 'SPDX release date (2023-02-17).');
