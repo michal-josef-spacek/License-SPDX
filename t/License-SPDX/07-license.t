@@ -3,7 +3,7 @@ use warnings;
 
 use JSON::PP::Boolean;
 use License::SPDX;
-use Test::More 'tests' => 2;
+use Test::More 'tests' => 3;
 use Test::NoWarnings;
 
 # Booleans.
@@ -29,4 +29,13 @@ is_deeply(
 		],
 	},
 	'Look for MIT license.',
+);
+
+# Test.
+$obj = License::SPDX->new;
+$ret_hr = $obj->license('BAD');
+is_deeply(
+	$ret_hr,
+	undef,
+	'Look for BAD license.',
 );

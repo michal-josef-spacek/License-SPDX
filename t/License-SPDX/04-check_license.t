@@ -4,7 +4,7 @@ use warnings;
 use English;
 use Error::Pure::Utils qw(clean);
 use License::SPDX;
-use Test::More 'tests' => 7;
+use Test::More 'tests' => 8;
 use Test::NoWarnings;
 
 # Test.
@@ -37,6 +37,14 @@ $opts_hr = {
 };
 $ret = $obj->check_license('MIT License', $opts_hr);
 is($ret, 1, 'Check license with explicit type name (MIT License = 1).');
+
+# Test.
+$obj = License::SPDX->new;
+$opts_hr = {
+	'check_type' => 'name',
+};
+$ret = $obj->check_license('BAD', $opts_hr);
+is($ret, 0, 'Check license with explicit type name (BAD = 0).');
 
 # Test.
 $obj = License::SPDX->new;
