@@ -109,6 +109,11 @@ License::SPDX - Object for SPDX licenses handling.
  my $spdx_release_date = $obj->spdx_release_date;
  my $spdx_version = $obj->spdx_version;
 
+=head1 DESCRIPTION
+
+Object for SPDX licenses handling is using license data from L<https://github.com/spdx/license-list-data> repository.
+Actual version is 3.20.
+
 =head1 METHODS
 
 =head2 C<new>
