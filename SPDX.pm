@@ -105,7 +105,7 @@ License::SPDX - Object for SPDX licenses handling.
  my $obj = License::SPDX->new;
  my $checked = $obj->check_license($check_string, $opts_hr);
  my $license_hr = $obj->license($license_id);
- my $licenses = $obj->licenses;
+ my @licenses = $obj->licenses;
  my $spdx_release_date = $obj->spdx_release_date;
  my $spdx_version = $obj->spdx_version;
 
@@ -152,7 +152,7 @@ Returns reference to hash.
 
 =head2 C<licenses>
 
- my $licenses = $obj->licenses;
+ my @licenses = $obj->licenses;
 
 Get all license structures.
 

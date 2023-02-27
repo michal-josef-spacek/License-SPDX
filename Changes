@@ -1,5 +1,6 @@
 0.04
  - Add information about license data to doc.
+ - Fix doc for licenses() method.
  - Update licenses to v3.20.
 
 0.03 2023-01-30T08:58:58+01:00
