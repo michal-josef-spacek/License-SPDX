@@ -1,5 +1,6 @@
 0.04
  - Add information about license data to doc.
+ - Add license exceptions handling.
  - Fix doc for licenses() method.
  - Update licenses to v3.20.
 

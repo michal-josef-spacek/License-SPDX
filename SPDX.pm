@@ -27,7 +27,44 @@ sub new {
 	my $data = slurp($data_fh);
 	$self->{'licenses'} = Cpanel::JSON::XS->new->ascii->pretty->allow_nonref->decode($data);
 
+	# Load all SPDX exceptions.
+	open my $data_exc_fh, '<', dist_dir('License-SPDX').'/exceptions.json';
+	my $data_exc = slurp($data_exc_fh);
+	$self->{'exceptions'} = Cpanel::JSON::XS->new->ascii->pretty->allow_nonref->decode($data_exc);
+
 	return $self;
+}
+
+sub check_exception {
+	my ($self, $check_string, $opts_hr) = @_;
+
+	if (! defined $opts_hr) {
+		$opts_hr = {};
+	}
+	if (! exists $opts_hr->{'check_type'}) {
+		$opts_hr->{'check_type'} = 'id';
+	}
+
+	my $check_cb = sub {
+		my $exception_hr = shift;
+		if ($opts_hr->{'check_type'} eq 'id') {
+			if ($check_string eq $exception_hr->{'licenseExceptionId'}) {
+				return 1;
+			}
+		} elsif ($opts_hr->{'check_type'} eq 'name') {
+			if ($check_string eq $exception_hr->{'name'}) {
+				return 1;
+			}
+		} else {
+			err "Check type '$opts_hr->{'check_type'}' doesn't supported.";
+		}
+	};
+
+	if (first { $check_cb->($_); } @{$self->{'exceptions'}->{'exceptions'}}) {
+		return 1;
+	} else {
+		return 0;
+	}
 }
 
 sub check_license {
@@ -60,6 +97,18 @@ sub check_license {
 	} else {
 		return 0;
 	}
+}
+
+sub exception {
+	my ($self, $exception_id) = @_;
+
+	return first { $_->{'licenseExceptionId'} eq $exception_id } @{$self->{'exceptions'}->{'exceptions'}};
+}
+
+sub exceptions {
+	my $self = shift;
+
+	return @{$self->{'exceptions'}->{'exceptions'}};
 }
 
 sub license {
@@ -103,7 +152,10 @@ License::SPDX - Object for SPDX licenses handling.
  use License::SPDX;
 
  my $obj = License::SPDX->new;
+ my $checked = $obj->check_exception($check_string, $opts_hr);
  my $checked = $obj->check_license($check_string, $opts_hr);
+ my $exception_hr = $obj->exception($exception_id);
+ my @exceptions = $obj->exceptions;
  my $license_hr = $obj->license($license_id);
  my @licenses = $obj->licenses;
  my $spdx_release_date = $obj->spdx_release_date;
@@ -124,6 +176,24 @@ Constructor.
 
 Returns instance of object.
 
+=head2 C<check_exception>
+
+ my $checked = $obj->check_exception($check_string, $opts_hr);
+
+Check if license exception exists.
+Argument C<$opts_hr> is reference to hash with parameter 'check_type' for
+definition of C<check_exception()> type.
+
+Possible 'check_type' values:
+
+ 'id' - Check license exception id.
+ 'name' - Check license exception name.
+
+Default value of 'check_type' is 'id'.
+If 'check_type' is bad, fail with error.
+
+Returns 1 (license exist) or 0 (license doesn't exist).
+
 =head2 C<check_license>
 
  my $checked = $obj->check_license($check_string, $opts_hr);
@@ -141,6 +211,22 @@ Default value of 'check_type' is 'id'.
 If 'check_type' is bad, fail with error.
 
 Returns 1 (license exist) or 0 (license doesn't exist).
+
+=head2 C<exception>
+
+ my $exception_hr = $obj->exception($exception_id);
+
+Get license exception structure.
+
+Returns reference to hash.
+
+=head2 C<exceptions>
+
+ my @exceptions = $obj->exceptions;
+
+Get all license exception structures.
+
+Returns array of references to hash.
 
 =head2 C<license>
 
@@ -179,6 +265,9 @@ Returns string.
  new():
          From Class::Utils::set_params():
                  Unknown parameter '%s'.
+
+ check_exception():
+         Check type '%s' doesn't supported.
 
  check_license():
          Check type '%s' doesn't supported.

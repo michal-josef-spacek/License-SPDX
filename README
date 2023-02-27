@@ -5,7 +5,10 @@ SYNOPSIS
      use License::SPDX;
 
      my $obj = License::SPDX->new;
+     my $checked = $obj->check_exception($check_string, $opts_hr);
      my $checked = $obj->check_license($check_string, $opts_hr);
+     my $exception_hr = $obj->exception($exception_id);
+     my @exceptions = $obj->exceptions;
      my $license_hr = $obj->license($license_id);
      my @licenses = $obj->licenses;
      my $spdx_release_date = $obj->spdx_release_date;
@@ -24,6 +27,23 @@ METHODS
 
     Returns instance of object.
 
+  "check_exception"
+     my $checked = $obj->check_exception($check_string, $opts_hr);
+
+    Check if license exception exists. Argument $opts_hr is reference to
+    hash with parameter 'check_type' for definition of "check_exception()"
+    type.
+
+    Possible 'check_type' values:
+
+     'id' - Check license exception id.
+     'name' - Check license exception name.
+
+    Default value of 'check_type' is 'id'. If 'check_type' is bad, fail with
+    error.
+
+    Returns 1 (license exist) or 0 (license doesn't exist).
+
   "check_license"
      my $checked = $obj->check_license($check_string, $opts_hr);
 
@@ -39,6 +59,20 @@ METHODS
     error.
 
     Returns 1 (license exist) or 0 (license doesn't exist).
+
+  "exception"
+     my $exception_hr = $obj->exception($exception_id);
+
+    Get license exception structure.
+
+    Returns reference to hash.
+
+  "exceptions"
+     my @exceptions = $obj->exceptions;
+
+    Get all license exception structures.
+
+    Returns array of references to hash.
 
   "license"
      my $license_hr = $obj->license($license_id);
@@ -72,6 +106,9 @@ ERRORS
      new():
              From Class::Utils::set_params():
                      Unknown parameter '%s'.
+
+     check_exception():
+             Check type '%s' doesn't supported.
 
      check_license():
              Check type '%s' doesn't supported.
