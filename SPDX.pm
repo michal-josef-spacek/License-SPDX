@@ -164,7 +164,7 @@ License::SPDX - Object for SPDX licenses handling.
 =head1 DESCRIPTION
 
 Object for SPDX licenses handling is using license data from L<https://github.com/spdx/license-list-data> repository.
-Actual version is 3.20.
+Actual version is 3.21.
 
 =head1 METHODS
 
