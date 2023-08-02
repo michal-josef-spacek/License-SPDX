@@ -10,7 +10,7 @@ use File::Share ':all';
 use List::Util qw(first);
 use Perl6::Slurp qw(slurp);
 
-our $VERSION = 0.06;
+our $VERSION = 0.07;
 
 # Constructor.
 sub new {
@@ -371,6 +371,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.06
+0.07
 
 =cut
